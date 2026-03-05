@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions PSC — Experts en Protection Sociale Complémentaire</title>
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #2C3E6B;
+            --blue: #5B7BB4;
+            --grey: #9A9A9A;
+            --light-grey: #F4F5F7;
+            --white: #FFFFFF;
+            --dark: #1A1A2E;
+            --text: #444444;
+            --radius: 12px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo img {
+            height: 48px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--navy);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blue);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--navy) !important;
+            color: var(--white) !important;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--blue) !important;
+            transform: translateY(-1px);
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .burger span {
+            width: 24px;
+            height: 2px;
+            background: var(--navy);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--navy) 0%, #1e2d52 50%, var(--blue) 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 72px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(91, 123, 180, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(154, 154, 154, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--white);
+            display: inline;
+            position: relative;
+        }
+
+        .hero-content h1 span::after {
+            content: '';
+            position: absolute;
+            left: 8%;
+            bottom: 6px;
+            height: 16px;
+            border-radius: 0;
+            background: rgba(91, 123, 180, 0.45);
+            animation: underline-in 0.8s ease-out 0.5s forwards;
+            width: 0;
+            z-index: -1;
+        }
+
+        @keyframes underline-in {
+            to {
+                width: 90%;
+            }
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 36px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            background: var(--light-grey);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-circles {
+            position: relative;
+            width: 580px;
+            height: 580px;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: top 0.5s ease-in-out, right 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+
+        .circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+
+        .circle::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            border-radius: 50%;
+        }
+
+        .circle-1 {
+            width: 350px;
+            height: 350px;
+            background: rgba(44, 62, 107, 0.45);
+            top: 0;
+            right: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle-2 {
+            width: 310px;
+            height: 310px;
+            background: rgba(91, 123, 180, 0.4);
+            top: 50px;
+            right: 220px;
+            animation: float 6s ease-in-out infinite 1s;
+        }
+
+        .circle-3 {
+            width: 280px;
+            height: 280px;
+            background: rgba(154, 154, 154, 0.35);
+            top: 260px;
+            right: 20px;
+            animation: float 6s ease-in-out infinite 2s;
+        }
+
+        /* Logo alignment on hover: circles line up horizontally like the logo (navy, blue, grey) */
+        .hero-circles:hover .circle {
+            animation: none;
+        }
+
+        .hero-circles:hover .circle-1 {
+            width: 160px;
+            height: 160px;
+            top: 180px;
+            right: 200px;
+        }
+
+        .hero-circles:hover .circle-2 {
+            width: 160px;
+            height: 160px;
+            top: 180px;
+            right: 110px;
+        }
+
+        .hero-circles:hover .circle-3 {
+            width: 160px;
+            height: 160px;
+            top: 180px;
+            right: 20px;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* ── Stats Band ── */
+        .stats {
+            background: var(--white);
+            padding: 48px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .stats .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 16px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--grey);
+            font-weight: 500;
+        }
+
+        /* ── Sections ── */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--grey);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ── Expertise ── */
+        .expertise {
+            background: var(--light-grey);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .expertise-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(44, 62, 107, 0.1);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+        }
+
+        .card-icon.navy {
+            background: rgba(44, 62, 107, 0.1);
+            color: var(--navy);
+        }
+
+        .card-icon.blue {
+            background: rgba(91, 123, 180, 0.1);
+            color: var(--blue);
+        }
+
+        .card-icon.grey {
+            background: rgba(154, 154, 154, 0.15);
+            color: #666;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .expertise-card p {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ── Approach ── */
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+
+        .approach-grid::before {
+            content: '';
+            position: absolute;
+            top: 48px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--navy), var(--blue), var(--grey));
+            z-index: 0;
+        }
+
+        .approach-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--navy);
+            transition: all 0.3s;
+        }
+
+        .approach-step:hover .step-number {
+            background: var(--navy);
+            color: var(--white);
+            transform: scale(1.08);
+        }
+
+        .approach-step h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .approach-step p {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ── Why Us ── */
+        .why-us {
+            background: var(--light-grey);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .why-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .why-content>p {
+            color: var(--text);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+
+        .why-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .why-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .why-item-icon {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(44, 62, 107, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 1.2rem;
+        }
+
+        .why-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .why-item p {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .why-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .trust-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 48px;
+            box-shadow: 0 8px 32px rgba(44, 62, 107, 0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .trust-box .big-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+        }
+
+        .trust-box h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .trust-box p {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--light-grey);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* ── Contact ── */
+        .contact {
+            background: linear-gradient(135deg, var(--navy) 0%, #1e2d52 100%);
+            color: var(--white);
+        }
+
+        .contact .section-tag {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .contact .section-header h2 {
+            color: var(--white);
+        }
+
+        .contact .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius);
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        .form-group select option {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--white);
+            color: var(--navy);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--light-grey);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 36px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .contact-info-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .contact-info-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-info-item p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 48px 0 24px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* ── Scroll Animations ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: 0 auto 36px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .approach-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+
+            .approach-grid::before {
+                display: none;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-visual {
+                order: -1;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 24px;
+                gap: 16px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .stats .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 64px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <img src="Picture1.png" alt="Solutions PSC">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#expertise">Expertise</a>
+                <a href="#approche">Notre approche</a>
+                <a href="#pourquoi">Pourquoi nous</a>
+                <a href="#contact" class="nav-cta">Nous contacter</a>
+            </div>
+            <div class="burger" id="burger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Votre protection sociale,<br><span>sur mesure.</span></h1>
+                <p>Courtier spécialisé en assurance collective, mutuelle et prévoyance pour les entreprises de plus de
+                    50 salariés. Chaque solution est conçue pour répondre à vos besoins spécifiques.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Demander un audit gratuit</a>
+                    <a href="#expertise" class="btn btn-secondary">Découvrir nos services</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-circles">
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="container">
+            <div class="stat-item fade-up">
+                <div class="stat-number" data-count="15">0</div>
+                <div class="stat-label">Années d'expérience</div>
+            </div>
+            <div class="stat-item fade-up">
+                <div class="stat-number" data-count="200" data-suffix="+">0</div>
+                <div class="stat-label">Entreprises accompagnées</div>
+            </div>
+            <div class="stat-item fade-up">
+                <div class="stat-number" data-count="50000" data-suffix="+">0</div>
+                <div class="stat-label">Salariés couverts</div>
+            </div>
+            <div class="stat-item fade-up">
+                <div class="stat-number" data-count="98" data-suffix="%">0</div>
+                <div class="stat-label">Taux de satisfaction</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Expertise -->
+    <section class="expertise" id="expertise">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-tag">Notre expertise</div>
+                <h2>Des solutions adaptées à chaque enjeu</h2>
+                <p>Nous analysons vos besoins pour construire des dispositifs de protection sociale parfaitement adaptés
+                    à votre entreprise et vos collaborateurs.</p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-card fade-up">
+                    <div class="card-icon navy">🏥</div>
+                    <h3>Complémentaire Santé</h3>
+                    <p>Des contrats santé collectifs négociés auprès des meilleurs assureurs du marché, avec des
+                        garanties ajustées à votre convention collective et aux attentes de vos salariés.</p>
+                </div>
+                <div class="expertise-card fade-up">
+                    <div class="card-icon blue">🛡️</div>
+                    <h3>Prévoyance Collective</h3>
+                    <p>Protection en cas d'incapacité, invalidité ou décès. Nous concevons des couvertures qui
+                        sécurisent vos collaborateurs et leurs familles face aux aléas de la vie.</p>
+                </div>
+                <div class="expertise-card fade-up">
+                    <div class="card-icon grey">📋</div>
+                    <h3>Audit & Conformité</h3>
+                    <p>Analyse complète de vos contrats existants, vérification de la conformité réglementaire et
+                        identification des axes d'optimisation de vos coûts.</p>
+                </div>
+                <div class="expertise-card fade-up">
+                    <div class="card-icon navy">📊</div>
+                    <h3>Pilotage des Comptes</h3>
+                    <p>Suivi technique et financier de vos contrats avec des reportings détaillés. Nous pilotons votre
+                        sinistralité et anticipons les évolutions tarifaires.</p>
+                </div>
+                <div class="expertise-card fade-up">
+                    <div class="card-icon blue">🤝</div>
+                    <h3>Accompagnement RH</h3>
+                    <p>Nous accompagnons vos équipes RH dans la communication auprès des salariés, les obligations
+                        légales et la gestion quotidienne des contrats.</p>
+                </div>
+                <div class="expertise-card fade-up">
+                    <div class="card-icon grey">⚖️</div>
+                    <h3>Mise en Concurrence</h3>
+                    <p>Organisation d'appels d'offres structurés pour garantir les meilleures conditions tarifaires tout
+                        en maintenant un niveau de garanties optimal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approche -->
+    <section id="approche">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-tag">Notre approche</div>
+                <h2>Un accompagnement en 4 étapes</h2>
+                <p>Une méthodologie éprouvée pour des résultats concrets et mesurables.</p>
+            </div>
+            <div class="approach-grid">
+                <div class="approach-step fade-up">
+                    <div class="step-number">1</div>
+                    <h3>Diagnostic</h3>
+                    <p>Analyse approfondie de votre situation, vos contrats actuels et les besoins de vos
+                        collaborateurs.</p>
+                </div>
+                <div class="approach-step fade-up">
+                    <div class="step-number">2</div>
+                    <h3>Conception</h3>
+                    <p>Élaboration de solutions sur mesure en adéquation avec votre budget et vos objectifs sociaux.</p>
+                </div>
+                <div class="approach-step fade-up">
+                    <div class="step-number">3</div>
+                    <h3>Négociation</h3>
+                    <p>Mise en concurrence des assureurs et négociation des meilleures conditions pour votre entreprise.
+                    </p>
+                </div>
+                <div class="approach-step fade-up">
+                    <div class="step-number">4</div>
+                    <h3>Suivi</h3>
+                    <p>Pilotage continu de vos contrats, gestion des sinistres et optimisation année après année.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pourquoi nous -->
+    <section class="why-us" id="pourquoi">
+        <div class="container">
+            <div class="why-grid">
+                <div class="why-content fade-up">
+                    <div class="section-tag">Pourquoi Solutions PSC</div>
+                    <h2>Un partenaire de confiance pour votre protection sociale</h2>
+                    <p>En tant que courtier indépendant, nous agissons exclusivement dans l'intérêt de nos clients.
+                        Notre engagement : des solutions 100% sur mesure, jamais de produit standardisé.</p>
+                    <div class="why-list">
+                        <div class="why-item">
+                            <div class="why-item-icon">🎯</div>
+                            <div>
+                                <h4>100% Sur Mesure</h4>
+                                <p>Chaque entreprise est unique. Nos solutions sont conçues spécifiquement pour répondre
+                                    à vos enjeux.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-item-icon">⚡</div>
+                            <div>
+                                <h4>Indépendance Totale</h4>
+                                <p>Courtier indépendant, nous n'avons aucun lien capitalistique avec les assureurs.
+                                    Votre intérêt est notre seule priorité.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-item-icon">📈</div>
+                            <div>
+                                <h4>Expertise Marché</h4>
+                                <p>Une connaissance fine du marché de l'assurance collective et un accès privilégié aux
+                                    principaux acteurs.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-item-icon">👥</div>
+                            <div>
+                                <h4>Interlocuteur Dédié</h4>
+                                <p>Un expert unique qui connaît votre entreprise et assure un suivi personnalisé tout au
+                                    long de l'année.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why-visual fade-up">
+                    <div class="trust-box">
+                        <div class="big-icon">🏛️</div>
+                        <h3>Courtier enregistré ORIAS</h3>
+                        <p>Solutions PSC est immatriculé au registre des intermédiaires en assurance, garantissant notre
+                            conformité et notre professionnalisme.</p>
+                        <div class="trust-badges">
+                            <span class="badge">Courtier certifié</span>
+                            <span class="badge">RC Professionnelle</span>
+                            <span class="badge">Garantie financière</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-tag">Contact</div>
+                <h2>Parlons de vos besoins</h2>
+                <p>Demandez un audit gratuit de votre protection sociale ou prenez rendez-vous avec un de nos experts.
+                </p>
+            </div>
+            <div class="contact-grid">
+                <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" placeholder="Votre prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="entreprise">Entreprise</label>
+                        <input type="text" id="entreprise" placeholder="Nom de votre entreprise" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="votre@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Téléphone</label>
+                            <input type="tel" id="telephone" placeholder="06 00 00 00 00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="effectif">Effectif de l'entreprise</label>
+                        <select id="effectif" required>
+                            <option value="" disabled selected>Sélectionnez</option>
+                            <option value="50-99">50 à 99 salariés</option>
+                            <option value="100-249">100 à 249 salariés</option>
+                            <option value="250-499">250 à 499 salariés</option>
+                            <option value="500+">500 salariés et plus</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre besoin</label>
+                        <textarea id="message" placeholder="Décrivez brièvement votre besoin..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Demander un audit gratuit</button>
+                </form>
+                <div class="contact-info fade-up">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">📍</div>
+                        <div>
+                            <h4>Adresse</h4>
+                            <p>Paris, Île-de-France</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>contact@solutions-psc.fr</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">📞</div>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>01 00 00 00 00</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">🕐</div>
+                        <div>
+                            <h4>Horaires</h4>
+                            <p>Du lundi au vendredi<br>9h00 — 18h00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo">
+                    <img src="Picture1.png" alt="Solutions PSC">
+                </a>
+                <div class="footer-links">
+                    <a href="#expertise">Expertise</a>
+                    <a href="#approche">Approche</a>
+                    <a href="#pourquoi">Pourquoi nous</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Solutions PSC — Experts en Protection Sociale Complémentaire. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Mobile menu ──
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+            document.getElementById('burger').classList.toggle('active');
+        }
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // ── Navbar scroll effect ──
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        // ── Scroll animations ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // ── Counter animation ──
+        function animateCounters() {
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const target = parseInt(counter.dataset.count);
+                const suffix = counter.dataset.suffix || '';
+                const duration = 2000;
+                const start = performance.now();
+
+                function update(now) {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(eased * target);
+
+                    if (target >= 1000) {
+                        counter.textContent = current.toLocaleString('fr-FR') + suffix;
+                    } else {
+                        counter.textContent = current + suffix;
+                    }
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                }
+                requestAnimationFrame(update);
+            });
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        statsObserver.observe(document.querySelector('.stats'));
+
+        // ── Active nav link on scroll ──
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 100;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+                if (link) {
+                    link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+                }
+            });
+        });
+
+        // ── Form submit ──
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            btn.textContent = 'Message envoyé ✓';
+            btn.style.background = '#4CAF50';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+                btn.textContent = 'Demander un audit gratuit';
+                btn.style.background = '';
+                btn.style.color = '';
+                e.target.reset();
+            }, 3000);
+        }
+    </script>
+
+</body>
+
+</html>
