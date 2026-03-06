@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solutions PSC — Experts en Protection Sociale Complémentaire</title>
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon_48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon_64.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="favicon_256.png">
     <style>
         /* ── Reset & Base ── */
         *,
@@ -557,12 +562,29 @@
         }
 
         @keyframes draw-line {
-            0%   { transform: scaleX(0); }
-            28%  { transform: scaleX(0.33); }
-            36%  { transform: scaleX(0.33); }
-            61%  { transform: scaleX(0.66); }
-            69%  { transform: scaleX(0.66); }
-            100% { transform: scaleX(1); }
+            0% {
+                transform: scaleX(0);
+            }
+
+            28% {
+                transform: scaleX(0.33);
+            }
+
+            36% {
+                transform: scaleX(0.33);
+            }
+
+            61% {
+                transform: scaleX(0.66);
+            }
+
+            69% {
+                transform: scaleX(0.66);
+            }
+
+            100% {
+                transform: scaleX(1);
+            }
         }
 
         .approach-step {
@@ -592,9 +614,23 @@
         }
 
         @keyframes step-pop {
-            0%   { transform: scale(1); background: var(--white); border-color: var(--navy); color: var(--navy); }
-            50%  { transform: scale(1.15); }
-            100% { transform: scale(1); background: var(--navy); border-color: var(--navy); color: var(--white); }
+            0% {
+                transform: scale(1);
+                background: var(--white);
+                border-color: var(--navy);
+                color: var(--navy);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+                background: var(--navy);
+                border-color: var(--navy);
+                color: var(--white);
+            }
         }
 
         .approach-step:hover .step-number {
@@ -1137,7 +1173,7 @@
     <nav id="navbar">
         <div class="container">
             <a href="#" class="nav-logo">
-                <img src="Picture1.png" alt="Solutions PSC">
+                <img src="logo.png" alt="Solutions PSC">
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="#expertise">Expertise</a>
@@ -1158,7 +1194,9 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Protection sociale complémentaire :<br><span>expertise et indépendance.</span></h1>
-                <p>Courtier indépendant dédié à la Protection sociale complémentaire, nous travaillons aux côtés des DRH et directions générales pour structurer, sécuriser et piloter vos régimes santé, prévoyance et retraite.</p>
+                <p>Courtier indépendant dédié à la Protection sociale complémentaire, nous travaillons aux côtés des DRH
+                    et directions générales pour structurer, sécuriser et piloter vos régimes santé, prévoyance et
+                    retraite.</p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">Échanger avec notre équipe</a>
                     <a href="#expertise" class="btn btn-secondary">Voir nos interventions</a>
@@ -1180,38 +1218,45 @@
             <div class="section-header fade-up">
                 <div class="section-tag">Domaines d'intervention</div>
                 <h2>Ce que nous prenons en charge</h2>
-                <p>Un périmètre couvrant l'ensemble des sujets de Protection sociale complémentaire, de la conception des régimes à leur gestion courante.</p>
+                <p>Un périmètre couvrant l'ensemble des sujets de Protection sociale complémentaire, de la conception
+                    des régimes à leur gestion courante.</p>
             </div>
             <div class="expertise-grid">
                 <div class="expertise-card fade-up">
                     <div class="card-icon navy">🏥</div>
                     <h3>Frais de santé</h3>
-                    <p>Analyse des garanties, adéquation avec les besoins réels des salariés, conformité avec les obligations conventionnelles.</p>
+                    <p>Analyse des garanties, adéquation avec les besoins réels des salariés, conformité avec les
+                        obligations conventionnelles.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon blue">🛡️</div>
                     <h3>Prévoyance collective</h3>
-                    <p>Structuration des couvertures incapacité, invalidité et décès. Vérification de la cohérence avec la CCN et les accords d'entreprise.</p>
+                    <p>Structuration des couvertures incapacité, invalidité et décès. Vérification de la cohérence avec
+                        la CCN et les accords d'entreprise.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon grey">📋</div>
                     <h3>Retraite supplémentaire</h3>
-                    <p>Mise en place et suivi des dispositifs Article 83, PERE-CO ou PER obligatoire selon vos enjeux de fidélisation et de rémunération différée.</p>
+                    <p>Mise en place et suivi des dispositifs Article 83, PERE-CO ou PER obligatoire selon vos enjeux de
+                        fidélisation et de rémunération différée.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon navy">📊</div>
                     <h3>Assurance emprunteur</h3>
-                    <p>Accompagnement indépendant sur les contrats emprunteurs, en dehors des circuits bancaires classiques.</p>
+                    <p>Accompagnement indépendant sur les contrats emprunteurs, en dehors des circuits bancaires
+                        classiques.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon blue">⚖️</div>
                     <h3>Conformité juridique</h3>
-                    <p>Veille réglementaire, rédaction des actes juridiques (DUE, accords) et prévention des risques de redressement URSSAF.</p>
+                    <p>Veille réglementaire, rédaction des actes juridiques (DUE, accords) et prévention des risques de
+                        redressement URSSAF.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon grey">📈</div>
                     <h3>Pilotage et reporting</h3>
-                    <p>Suivi des comptes de résultat, analyse de la sinistralité et reporting structuré à destination de la DRH et de la direction financière.</p>
+                    <p>Suivi des comptes de résultat, analyse de la sinistralité et reporting structuré à destination de
+                        la DRH et de la direction financière.</p>
                 </div>
             </div>
         </div>
@@ -1230,22 +1275,26 @@
                 <div class="approach-step fade-up">
                     <div class="step-number">1</div>
                     <h3>État des lieux</h3>
-                    <p>Audit de vos contrats en cours, analyse des comptes de résultat et lecture de vos obligations conventionnelles.</p>
+                    <p>Audit de vos contrats en cours, analyse des comptes de résultat et lecture de vos obligations
+                        conventionnelles.</p>
                 </div>
                 <div class="approach-step fade-up">
                     <div class="step-number">2</div>
                     <h3>Cahier des charges</h3>
-                    <p>Rédaction des spécifications techniques en lien avec la DRH, adaptées à votre population et à vos contraintes budgétaires.</p>
+                    <p>Rédaction des spécifications techniques en lien avec la DRH, adaptées à votre population et à vos
+                        contraintes budgétaires.</p>
                 </div>
                 <div class="approach-step fade-up">
                     <div class="step-number">3</div>
                     <h3>Mise en concurrence</h3>
-                    <p>Consultation des organismes assureurs, analyse comparative des offres et présentation d'une recommandation argumentée.</p>
+                    <p>Consultation des organismes assureurs, analyse comparative des offres et présentation d'une
+                        recommandation argumentée.</p>
                 </div>
                 <div class="approach-step fade-up">
                     <div class="step-number">4</div>
                     <h3>Suivi annuel</h3>
-                    <p>Pilotage des comptes, reporting régulier et anticipation des renouvellements pour éviter les hausses subies.</p>
+                    <p>Pilotage des comptes, reporting régulier et anticipation des renouvellements pour éviter les
+                        hausses subies.</p>
                 </div>
             </div>
         </div>
@@ -1258,41 +1307,48 @@
                 <div class="why-content fade-up">
                     <div class="section-tag">Ce que ça change</div>
                     <h2>Ce qu'un courtier dédié apporte concrètement</h2>
-                    <p>La Protection sociale complémentaire mobilise du temps, de l'expertise juridique et une lecture fine des comptes. Nous prenons en charge ces sujets pour que vos équipes se concentrent sur leur métier.</p>
+                    <p>La Protection sociale complémentaire mobilise du temps, de l'expertise juridique et une lecture
+                        fine des comptes. Nous prenons en charge ces sujets pour que vos équipes se concentrent sur leur
+                        métier.</p>
                     <div class="why-list">
                         <div class="why-item">
                             <div class="why-item-icon">📈</div>
                             <div>
                                 <h4>Visibilité budgétaire</h4>
-                                <p>Vous savez ce que coûtent vos régimes, pourquoi, et comment les faire évoluer sans subir les renouvellements.</p>
+                                <p>Vous savez ce que coûtent vos régimes, pourquoi, et comment les faire évoluer sans
+                                    subir les renouvellements.</p>
                             </div>
                         </div>
                         <div class="why-item">
                             <div class="why-item-icon">⚖️</div>
                             <div>
                                 <h4>Risque juridique maîtrisé</h4>
-                                <p>Actes juridiques à jour, conformité URSSAF vérifiée, veille réglementaire continue.</p>
+                                <p>Actes juridiques à jour, conformité URSSAF vérifiée, veille réglementaire continue.
+                                </p>
                             </div>
                         </div>
                         <div class="why-item">
                             <div class="why-item-icon">📊</div>
                             <div>
                                 <h4>Reporting actionnable</h4>
-                                <p>Des données claires et régulières pour la DRH et la direction financière, pas des tableaux incompréhensibles.</p>
+                                <p>Des données claires et régulières pour la DRH et la direction financière, pas des
+                                    tableaux incompréhensibles.</p>
                             </div>
                         </div>
                         <div class="why-item">
                             <div class="why-item-icon">🤝</div>
                             <div>
                                 <h4>Un interlocuteur unique</h4>
-                                <p>Un point de contact permanent qui connaît vos contrats, votre historique et vos contraintes.</p>
+                                <p>Un point de contact permanent qui connaît vos contrats, votre historique et vos
+                                    contraintes.</p>
                             </div>
                         </div>
                         <div class="why-item">
                             <div class="why-item-icon">🧭</div>
                             <div>
                                 <h4>Indépendance totale</h4>
-                                <p>Aucun lien capitalistique avec un assureur. Nos recommandations servent vos intérêts, pas ceux d'un organisme.</p>
+                                <p>Aucun lien capitalistique avec un assureur. Nos recommandations servent vos intérêts,
+                                    pas ceux d'un organisme.</p>
                             </div>
                         </div>
                     </div>
@@ -1301,7 +1357,8 @@
                     <div class="why-side-card">
                         <div class="big-icon">🏛️</div>
                         <h3>Cadre de travail et conformité</h3>
-                        <p>Un accompagnement structuré, documenté et conforme aux exigences réglementaires, avec une lecture claire pour la DRH et la direction.</p>
+                        <p>Un accompagnement structuré, documenté et conforme aux exigences réglementaires, avec une
+                            lecture claire pour la DRH et la direction.</p>
                         <div class="why-side-badges">
                             <span class="side-badge">ORIAS</span>
                             <span class="side-badge">RC Professionnelle</span>
@@ -1319,49 +1376,37 @@
             <div class="section-header fade-up">
                 <div class="section-tag">Contact</div>
                 <h2>Discutons de votre situation</h2>
-                <p>Renouvellement en cours, doute sur la conformité de vos actes, besoin de visibilité sur vos comptes — exposez-nous le sujet.</p>
+                <p>Renouvellement en cours, doute sur la conformité de vos actes, besoin de visibilité sur vos comptes —
+                    exposez-nous le sujet.</p>
             </div>
             <div class="contact-grid">
                 <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="nom">Nom</label>
-                            <input type="text" id="nom" placeholder="Votre nom" required>
+                            <label for="nom">Nom et prénom</label>
+                            <input type="text" id="nom" placeholder="Votre nom et prénom" required>
                         </div>
                         <div class="form-group">
-                            <label for="prenom">Prénom</label>
-                            <input type="text" id="prenom" placeholder="Votre prénom" required>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="votre@email.com" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="entreprise">Entreprise</label>
                         <input type="text" id="entreprise" placeholder="Nom de votre entreprise" required>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="votre@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telephone">Téléphone</label>
-                            <input type="tel" id="telephone" placeholder="06 00 00 00 00">
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label for="effectif">Effectif de l'entreprise</label>
+                        <label for="effectif">Nombre d'employés</label>
                         <select id="effectif" required>
                             <option value="" disabled selected>Sélectionnez</option>
+                            <option value="1-49">1 à 49 salariés</option>
                             <option value="50-99">50 à 99 salariés</option>
                             <option value="100-249">100 à 249 salariés</option>
                             <option value="250-499">250 à 499 salariés</option>
                             <option value="500+">500 salariés et plus</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Votre besoin</label>
-                        <textarea id="message" placeholder="Décrivez brièvement votre besoin..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Envoyer</button>
+                    <button type="submit" class="btn-submit">Contacter</button>
                 </form>
             </div>
         </div>
@@ -1372,7 +1417,7 @@
         <div class="container">
             <div class="footer-content">
                 <a href="#" class="footer-logo">
-                    <img src="Picture1.png" alt="Solutions PSC">
+                    <img src="logo.png" alt="Solutions PSC">
                 </a>
                 <div class="footer-links">
                     <a href="#expertise">Expertise</a>
@@ -1474,16 +1519,27 @@
         // ── Form submit ──
         function handleSubmit(e) {
             e.preventDefault();
-            const btn = e.target.querySelector('.btn-submit');
-            btn.textContent = 'Message envoyé ✓';
-            btn.style.background = '#4CAF50';
-            btn.style.color = '#fff';
-            setTimeout(() => {
-                btn.textContent = 'Envoyer';
-                btn.style.background = '';
-                btn.style.color = '';
-                e.target.reset();
-            }, 3000);
+            const nom = document.getElementById('nom').value.trim();
+            const entreprise = document.getElementById('entreprise').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const effectif = document.getElementById('effectif').value;
+
+            const subject = `Demande de contact - ${entreprise || 'Entreprise'}`;
+            const body = [
+                'Bonjour,',
+                '',
+                "Je souhaite échanger au sujet de la Protection sociale complémentaire de mon entreprise.",
+                "Nous avons un besoin d'accompagnement sur nos régimes collectifs.",
+                '',
+                `Nom et prénom : ${nom}`,
+                `Entreprise : ${entreprise}`,
+                `Email : ${email}`,
+                `Nombre d'employés : ${effectif}`,
+                '',
+                'Cordialement,'
+            ].join('\n');
+
+            window.location.href = `mailto:contact@solutionspsc.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
     </script>
 
