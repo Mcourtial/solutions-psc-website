@@ -184,14 +184,21 @@
 
         .hero .container {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            margin-top: 36px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            pointer-events: auto;
         }
 
         .hero-content h1 {
+            margin-top: 2em;
             font-size: 3.2rem;
             font-weight: 700;
             color: var(--white);
@@ -213,7 +220,7 @@
             height: 16px;
             border-radius: 0;
             background: rgba(91, 123, 180, 0.45);
-            animation: underline-in 0.8s ease-out 0.5s forwards;
+            animation: underline-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
             width: 0;
             z-index: -1;
         }
@@ -273,15 +280,26 @@
         }
 
         .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: auto;
+            overflow: visible;
         }
 
         .hero-circles {
-            position: relative;
+            position: absolute;
             width: 580px;
             height: 580px;
+            right: max(24px, calc((100vw - 1140px) / 2 + 24px));
+            top: calc(50% + 18px);
+            transform: translateY(-50%);
+            pointer-events: auto;
+            transition:
+                left 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                right 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                bottom 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .circle {
@@ -295,7 +313,13 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.25),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: top 0.5s ease-in-out, right 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+            will-change: transform, top, left, right, width, height;
+            transition:
+                top 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                left 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                right 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.75s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .circle::before {
@@ -326,7 +350,7 @@
             background: rgba(44, 62, 107, 0.45);
             top: 0;
             right: 0;
-            animation: float 6s ease-in-out infinite;
+            animation: float 8s ease-in-out infinite;
         }
 
         .circle-2 {
@@ -335,7 +359,7 @@
             background: rgba(91, 123, 180, 0.4);
             top: 50px;
             right: 220px;
-            animation: float 6s ease-in-out infinite 1s;
+            animation: float 8.8s ease-in-out infinite 0.9s;
         }
 
         .circle-3 {
@@ -344,33 +368,59 @@
             background: rgba(154, 154, 154, 0.35);
             top: 260px;
             right: 20px;
-            animation: float 6s ease-in-out infinite 2s;
+            animation: float 9.6s ease-in-out infinite 1.8s;
         }
 
-        /* Logo alignment on hover: circles line up horizontally like the logo (navy, blue, grey) */
-        .hero-circles:hover .circle {
+        .hero-circles.circles-aligned .circle {
             animation: none;
         }
 
-        .hero-circles:hover .circle-1 {
-            width: 160px;
-            height: 160px;
-            top: 180px;
-            right: 200px;
+        .hero-circles.circles-aligned .circle-1 {
+            width: 216px;
+            height: 216px;
+            top: 160px;
+            right: 260px;
         }
 
-        .hero-circles:hover .circle-2 {
-            width: 160px;
-            height: 160px;
-            top: 180px;
-            right: 110px;
+        .hero-circles.circles-aligned .circle-2 {
+            width: 216px;
+            height: 216px;
+            top: 160px;
+            right: 140px;
         }
 
-        .hero-circles:hover .circle-3 {
-            width: 160px;
-            height: 160px;
-            top: 180px;
+        .hero-circles.circles-aligned .circle-3 {
+            width: 216px;
+            height: 216px;
+            top: 160px;
             right: 20px;
+        }
+
+        @media (min-width: 1025px) and (hover: hover) {
+            .hero-circles:hover .circle {
+                animation: none;
+            }
+
+            .hero-circles:hover .circle-1 {
+                width: 216px;
+                height: 216px;
+                top: 160px;
+                right: 260px;
+            }
+
+            .hero-circles:hover .circle-2 {
+                width: 216px;
+                height: 216px;
+                top: 160px;
+                right: 140px;
+            }
+
+            .hero-circles:hover .circle-3 {
+                width: 216px;
+                height: 216px;
+                top: 160px;
+                right: 20px;
+            }
         }
 
         @keyframes float {
@@ -381,40 +431,8 @@
             }
 
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-14px);
             }
-        }
-
-        /* ── Stats Band ── */
-        .stats {
-            background: var(--white);
-            padding: 48px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        .stats .container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 16px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--navy);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--grey);
-            font-weight: 500;
         }
 
         /* ── Sections ── */
@@ -522,15 +540,29 @@
             position: relative;
         }
 
-        .approach-grid::before {
-            content: '';
+        .approach-line {
             position: absolute;
             top: 48px;
             left: 12.5%;
             right: 12.5%;
             height: 2px;
-            background: linear-gradient(90deg, var(--navy), var(--blue), var(--grey));
             z-index: 0;
+            background: linear-gradient(90deg, var(--navy), var(--blue), var(--grey));
+            transform-origin: left center;
+            transform: scaleX(0);
+        }
+
+        .approach-line.animate {
+            animation: draw-line 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes draw-line {
+            0%   { transform: scaleX(0); }
+            28%  { transform: scaleX(0.33); }
+            36%  { transform: scaleX(0.33); }
+            61%  { transform: scaleX(0.66); }
+            69%  { transform: scaleX(0.66); }
+            100% { transform: scaleX(1); }
         }
 
         .approach-step {
@@ -553,6 +585,16 @@
             font-weight: 700;
             color: var(--navy);
             transition: all 0.3s;
+        }
+
+        .approach-step.step-reached .step-number {
+            animation: step-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes step-pop {
+            0%   { transform: scale(1); background: var(--white); border-color: var(--navy); color: var(--navy); }
+            50%  { transform: scale(1.15); }
+            100% { transform: scale(1); background: var(--navy); border-color: var(--navy); color: var(--white); }
         }
 
         .approach-step:hover .step-number {
@@ -581,9 +623,11 @@
 
         .why-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.15fr 0.85fr;
             gap: 48px;
-            align-items: center;
+            align-items: start;
+            max-width: 1120px;
+            margin: 0 auto;
         }
 
         .why-content h2 {
@@ -609,6 +653,16 @@
             display: flex;
             gap: 16px;
             align-items: flex-start;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(44, 62, 107, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .why-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(44, 62, 107, 0.12);
         }
 
         .why-item-icon {
@@ -636,50 +690,48 @@
             color: var(--text);
         }
 
-        .why-visual {
+        .why-side {
             display: flex;
             justify-content: center;
         }
 
-        .trust-box {
+        .why-side-card {
             background: var(--white);
             border-radius: var(--radius);
-            padding: 48px;
+            padding: 40px 36px;
             box-shadow: 0 8px 32px rgba(44, 62, 107, 0.08);
-            text-align: center;
             width: 100%;
-            max-width: 440px;
+            max-width: 420px;
         }
 
-        .trust-box .big-icon {
-            font-size: 3rem;
-            margin-bottom: 24px;
+        .why-side-card .big-icon {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
         }
 
-        .trust-box h3 {
-            font-size: 1.4rem;
+        .why-side-card h3 {
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--navy);
             margin-bottom: 12px;
         }
 
-        .trust-box p {
+        .why-side-card p {
             color: var(--text);
             font-size: 0.95rem;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
-        .trust-badges {
+        .why-side-badges {
             display: flex;
-            justify-content: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
-        .badge {
-            padding: 8px 16px;
+        .side-badge {
+            padding: 8px 14px;
             border-radius: 20px;
-            background: var(--light-grey);
+            background: rgba(44, 62, 107, 0.08);
             font-size: 0.8rem;
             font-weight: 600;
             color: var(--navy);
@@ -704,9 +756,8 @@
         }
 
         .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            max-width: 640px;
+            margin: 0 auto;
         }
 
         .contact-form {
@@ -790,41 +841,6 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 36px;
-        }
-
-        .contact-info-item {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
-        .contact-info-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-        }
-
-        .contact-info-item h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .contact-info-item p {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
 
         /* ── Footer ── */
         footer {
@@ -873,7 +889,7 @@
         .fade-up {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.65s ease-out, transform 0.65s ease-out;
         }
 
         .fade-up.visible {
@@ -886,6 +902,14 @@
             .hero .container {
                 grid-template-columns: 1fr;
                 text-align: center;
+                margin-top: 18px;
+                position: relative;
+                min-height: 760px;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 3;
             }
 
             .hero-content p {
@@ -897,7 +921,84 @@
             }
 
             .hero-visual {
-                display: none;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+                pointer-events: none;
+                margin-top: 0;
+                width: 100%;
+                margin-left: 0;
+                overflow: hidden;
+            }
+
+            .hero-circles {
+                width: 700px;
+                height: 700px;
+                position: absolute;
+                left: 50%;
+                right: auto;
+                bottom: -200px;
+                top: auto;
+                transform: translateX(-50%);
+                overflow: visible;
+                transition:
+                    width 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                    height 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                    bottom 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .circle-1 {
+                width: 480px !important;
+                height: 480px !important;
+                top: 40px !important;
+                left: 220px !important;
+                right: auto !important;
+            }
+
+            .circle-2 {
+                width: 420px !important;
+                height: 420px !important;
+                top: 0 !important;
+                left: -40px !important;
+                right: auto !important;
+            }
+
+            .circle-3 {
+                width: 360px !important;
+                height: 360px !important;
+                top: 290px !important;
+                left: 260px !important;
+                right: auto !important;
+            }
+
+            .hero-circles.circles-aligned {
+                width: 330px;
+                height: 200px;
+                bottom: 30px;
+            }
+
+            .hero-circles.circles-aligned .circle-1,
+            .hero-circles.circles-aligned .circle-2,
+            .hero-circles.circles-aligned .circle-3 {
+                width: 130px !important;
+                height: 130px !important;
+                top: 35px !important;
+                animation: none !important;
+            }
+
+            .hero-circles.circles-aligned .circle-1 {
+                left: 0 !important;
+            }
+
+            .hero-circles.circles-aligned .circle-2 {
+                left: 100px !important;
+            }
+
+            .hero-circles.circles-aligned .circle-3 {
+                left: 200px !important;
             }
 
             .hero-content h1 {
@@ -913,7 +1014,7 @@
                 gap: 40px;
             }
 
-            .approach-grid::before {
+            .approach-line {
                 display: none;
             }
 
@@ -921,13 +1022,10 @@
                 grid-template-columns: 1fr;
             }
 
-            .why-visual {
-                order: -1;
+            .why-side {
+                justify-content: flex-start;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
@@ -953,12 +1051,61 @@
                 display: flex;
             }
 
-            .stats .container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .hero-content h1 {
                 font-size: 2rem;
+            }
+
+            .hero-circles {
+                width: 600px;
+                height: 620px;
+                bottom: -250px;
+            }
+
+            .circle-1 {
+                width: 420px !important;
+                height: 420px !important;
+                top: 60px !important;
+                left: 180px !important;
+            }
+
+            .circle-2 {
+                width: 360px !important;
+                height: 360px !important;
+                top: 10px !important;
+                left: -30px !important;
+            }
+
+            .circle-3 {
+                width: 310px !important;
+                height: 310px !important;
+                top: 270px !important;
+                left: 210px !important;
+            }
+
+            .hero-circles.circles-aligned {
+                width: 269px;
+                height: 170px;
+                bottom: 20px;
+            }
+
+            .hero-circles.circles-aligned .circle-1,
+            .hero-circles.circles-aligned .circle-2,
+            .hero-circles.circles-aligned .circle-3 {
+                width: 105px !important;
+                height: 105px !important;
+                top: 32px !important;
+            }
+
+            .hero-circles.circles-aligned .circle-1 {
+                left: 0 !important;
+            }
+
+            .hero-circles.circles-aligned .circle-2 {
+                left: 82px !important;
+            }
+
+            .hero-circles.circles-aligned .circle-3 {
+                left: 164px !important;
             }
 
             .section-header h2 {
@@ -1010,91 +1157,61 @@
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Votre protection sociale,<br><span>sur mesure.</span></h1>
-                <p>Courtier spécialisé en assurance collective, mutuelle et prévoyance pour les entreprises de plus de
-                    50 salariés. Chaque solution est conçue pour répondre à vos besoins spécifiques.</p>
+                <h1>Protection sociale complémentaire :<br><span>expertise et indépendance.</span></h1>
+                <p>Courtier indépendant dédié à la Protection sociale complémentaire, nous travaillons aux côtés des DRH et directions générales pour structurer, sécuriser et piloter vos régimes santé, prévoyance et retraite.</p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Demander un audit gratuit</a>
-                    <a href="#expertise" class="btn btn-secondary">Découvrir nos services</a>
+                    <a href="#contact" class="btn btn-primary">Échanger avec notre équipe</a>
+                    <a href="#expertise" class="btn btn-secondary">Voir nos interventions</a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-circles">
-                    <div class="circle circle-1"></div>
-                    <div class="circle circle-2"></div>
-                    <div class="circle circle-3"></div>
-                </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-circles">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
             </div>
         </div>
     </section>
-
-    <!-- Stats -->
-    <div class="stats">
-        <div class="container">
-            <div class="stat-item fade-up">
-                <div class="stat-number" data-count="15">0</div>
-                <div class="stat-label">Années d'expérience</div>
-            </div>
-            <div class="stat-item fade-up">
-                <div class="stat-number" data-count="200" data-suffix="+">0</div>
-                <div class="stat-label">Entreprises accompagnées</div>
-            </div>
-            <div class="stat-item fade-up">
-                <div class="stat-number" data-count="50000" data-suffix="+">0</div>
-                <div class="stat-label">Salariés couverts</div>
-            </div>
-            <div class="stat-item fade-up">
-                <div class="stat-number" data-count="98" data-suffix="%">0</div>
-                <div class="stat-label">Taux de satisfaction</div>
-            </div>
-        </div>
-    </div>
 
     <!-- Expertise -->
     <section class="expertise" id="expertise">
         <div class="container">
             <div class="section-header fade-up">
-                <div class="section-tag">Notre expertise</div>
-                <h2>Des solutions adaptées à chaque enjeu</h2>
-                <p>Nous analysons vos besoins pour construire des dispositifs de protection sociale parfaitement adaptés
-                    à votre entreprise et vos collaborateurs.</p>
+                <div class="section-tag">Domaines d'intervention</div>
+                <h2>Ce que nous prenons en charge</h2>
+                <p>Un périmètre couvrant l'ensemble des sujets de Protection sociale complémentaire, de la conception des régimes à leur gestion courante.</p>
             </div>
             <div class="expertise-grid">
                 <div class="expertise-card fade-up">
                     <div class="card-icon navy">🏥</div>
-                    <h3>Complémentaire Santé</h3>
-                    <p>Des contrats santé collectifs négociés auprès des meilleurs assureurs du marché, avec des
-                        garanties ajustées à votre convention collective et aux attentes de vos salariés.</p>
+                    <h3>Frais de santé</h3>
+                    <p>Analyse des garanties, adéquation avec les besoins réels des salariés, conformité avec les obligations conventionnelles.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon blue">🛡️</div>
-                    <h3>Prévoyance Collective</h3>
-                    <p>Protection en cas d'incapacité, invalidité ou décès. Nous concevons des couvertures qui
-                        sécurisent vos collaborateurs et leurs familles face aux aléas de la vie.</p>
+                    <h3>Prévoyance collective</h3>
+                    <p>Structuration des couvertures incapacité, invalidité et décès. Vérification de la cohérence avec la CCN et les accords d'entreprise.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon grey">📋</div>
-                    <h3>Audit & Conformité</h3>
-                    <p>Analyse complète de vos contrats existants, vérification de la conformité réglementaire et
-                        identification des axes d'optimisation de vos coûts.</p>
+                    <h3>Retraite supplémentaire</h3>
+                    <p>Mise en place et suivi des dispositifs Article 83, PERE-CO ou PER obligatoire selon vos enjeux de fidélisation et de rémunération différée.</p>
                 </div>
                 <div class="expertise-card fade-up">
                     <div class="card-icon navy">📊</div>
-                    <h3>Pilotage des Comptes</h3>
-                    <p>Suivi technique et financier de vos contrats avec des reportings détaillés. Nous pilotons votre
-                        sinistralité et anticipons les évolutions tarifaires.</p>
+                    <h3>Assurance emprunteur</h3>
+                    <p>Accompagnement indépendant sur les contrats emprunteurs, en dehors des circuits bancaires classiques.</p>
                 </div>
                 <div class="expertise-card fade-up">
-                    <div class="card-icon blue">🤝</div>
-                    <h3>Accompagnement RH</h3>
-                    <p>Nous accompagnons vos équipes RH dans la communication auprès des salariés, les obligations
-                        légales et la gestion quotidienne des contrats.</p>
+                    <div class="card-icon blue">⚖️</div>
+                    <h3>Conformité juridique</h3>
+                    <p>Veille réglementaire, rédaction des actes juridiques (DUE, accords) et prévention des risques de redressement URSSAF.</p>
                 </div>
                 <div class="expertise-card fade-up">
-                    <div class="card-icon grey">⚖️</div>
-                    <h3>Mise en Concurrence</h3>
-                    <p>Organisation d'appels d'offres structurés pour garantir les meilleures conditions tarifaires tout
-                        en maintenant un niveau de garanties optimal.</p>
+                    <div class="card-icon grey">📈</div>
+                    <h3>Pilotage et reporting</h3>
+                    <p>Suivi des comptes de résultat, analyse de la sinistralité et reporting structuré à destination de la DRH et de la direction financière.</p>
                 </div>
             </div>
         </div>
@@ -1105,31 +1222,30 @@
         <div class="container">
             <div class="section-header fade-up">
                 <div class="section-tag">Notre approche</div>
-                <h2>Un accompagnement en 4 étapes</h2>
-                <p>Une méthodologie éprouvée pour des résultats concrets et mesurables.</p>
+                <h2>Comment nous travaillons</h2>
+                <p>Un cadre de mission clair, du diagnostic initial au pilotage dans la durée.</p>
             </div>
             <div class="approach-grid">
+                <div class="approach-line" id="approachLine"></div>
                 <div class="approach-step fade-up">
                     <div class="step-number">1</div>
-                    <h3>Diagnostic</h3>
-                    <p>Analyse approfondie de votre situation, vos contrats actuels et les besoins de vos
-                        collaborateurs.</p>
+                    <h3>État des lieux</h3>
+                    <p>Audit de vos contrats en cours, analyse des comptes de résultat et lecture de vos obligations conventionnelles.</p>
                 </div>
                 <div class="approach-step fade-up">
                     <div class="step-number">2</div>
-                    <h3>Conception</h3>
-                    <p>Élaboration de solutions sur mesure en adéquation avec votre budget et vos objectifs sociaux.</p>
+                    <h3>Cahier des charges</h3>
+                    <p>Rédaction des spécifications techniques en lien avec la DRH, adaptées à votre population et à vos contraintes budgétaires.</p>
                 </div>
                 <div class="approach-step fade-up">
                     <div class="step-number">3</div>
-                    <h3>Négociation</h3>
-                    <p>Mise en concurrence des assureurs et négociation des meilleures conditions pour votre entreprise.
-                    </p>
+                    <h3>Mise en concurrence</h3>
+                    <p>Consultation des organismes assureurs, analyse comparative des offres et présentation d'une recommandation argumentée.</p>
                 </div>
                 <div class="approach-step fade-up">
                     <div class="step-number">4</div>
-                    <h3>Suivi</h3>
-                    <p>Pilotage continu de vos contrats, gestion des sinistres et optimisation année après année.</p>
+                    <h3>Suivi annuel</h3>
+                    <p>Pilotage des comptes, reporting régulier et anticipation des renouvellements pour éviter les hausses subies.</p>
                 </div>
             </div>
         </div>
@@ -1140,55 +1256,56 @@
         <div class="container">
             <div class="why-grid">
                 <div class="why-content fade-up">
-                    <div class="section-tag">Pourquoi Solutions PSC</div>
-                    <h2>Un partenaire de confiance pour votre protection sociale</h2>
-                    <p>En tant que courtier indépendant, nous agissons exclusivement dans l'intérêt de nos clients.
-                        Notre engagement : des solutions 100% sur mesure, jamais de produit standardisé.</p>
+                    <div class="section-tag">Ce que ça change</div>
+                    <h2>Ce qu'un courtier dédié apporte concrètement</h2>
+                    <p>La Protection sociale complémentaire mobilise du temps, de l'expertise juridique et une lecture fine des comptes. Nous prenons en charge ces sujets pour que vos équipes se concentrent sur leur métier.</p>
                     <div class="why-list">
-                        <div class="why-item">
-                            <div class="why-item-icon">🎯</div>
-                            <div>
-                                <h4>100% Sur Mesure</h4>
-                                <p>Chaque entreprise est unique. Nos solutions sont conçues spécifiquement pour répondre
-                                    à vos enjeux.</p>
-                            </div>
-                        </div>
-                        <div class="why-item">
-                            <div class="why-item-icon">⚡</div>
-                            <div>
-                                <h4>Indépendance Totale</h4>
-                                <p>Courtier indépendant, nous n'avons aucun lien capitalistique avec les assureurs.
-                                    Votre intérêt est notre seule priorité.</p>
-                            </div>
-                        </div>
                         <div class="why-item">
                             <div class="why-item-icon">📈</div>
                             <div>
-                                <h4>Expertise Marché</h4>
-                                <p>Une connaissance fine du marché de l'assurance collective et un accès privilégié aux
-                                    principaux acteurs.</p>
+                                <h4>Visibilité budgétaire</h4>
+                                <p>Vous savez ce que coûtent vos régimes, pourquoi, et comment les faire évoluer sans subir les renouvellements.</p>
                             </div>
                         </div>
                         <div class="why-item">
-                            <div class="why-item-icon">👥</div>
+                            <div class="why-item-icon">⚖️</div>
                             <div>
-                                <h4>Interlocuteur Dédié</h4>
-                                <p>Un expert unique qui connaît votre entreprise et assure un suivi personnalisé tout au
-                                    long de l'année.</p>
+                                <h4>Risque juridique maîtrisé</h4>
+                                <p>Actes juridiques à jour, conformité URSSAF vérifiée, veille réglementaire continue.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-item-icon">📊</div>
+                            <div>
+                                <h4>Reporting actionnable</h4>
+                                <p>Des données claires et régulières pour la DRH et la direction financière, pas des tableaux incompréhensibles.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-item-icon">🤝</div>
+                            <div>
+                                <h4>Un interlocuteur unique</h4>
+                                <p>Un point de contact permanent qui connaît vos contrats, votre historique et vos contraintes.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-item-icon">🧭</div>
+                            <div>
+                                <h4>Indépendance totale</h4>
+                                <p>Aucun lien capitalistique avec un assureur. Nos recommandations servent vos intérêts, pas ceux d'un organisme.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="why-visual fade-up">
-                    <div class="trust-box">
+                <div class="why-side fade-up">
+                    <div class="why-side-card">
                         <div class="big-icon">🏛️</div>
-                        <h3>Courtier enregistré ORIAS</h3>
-                        <p>Solutions PSC est immatriculé au registre des intermédiaires en assurance, garantissant notre
-                            conformité et notre professionnalisme.</p>
-                        <div class="trust-badges">
-                            <span class="badge">Courtier certifié</span>
-                            <span class="badge">RC Professionnelle</span>
-                            <span class="badge">Garantie financière</span>
+                        <h3>Cadre de travail et conformité</h3>
+                        <p>Un accompagnement structuré, documenté et conforme aux exigences réglementaires, avec une lecture claire pour la DRH et la direction.</p>
+                        <div class="why-side-badges">
+                            <span class="side-badge">ORIAS</span>
+                            <span class="side-badge">RC Professionnelle</span>
+                            <span class="side-badge">Garantie financière</span>
                         </div>
                     </div>
                 </div>
@@ -1201,9 +1318,8 @@
         <div class="container">
             <div class="section-header fade-up">
                 <div class="section-tag">Contact</div>
-                <h2>Parlons de vos besoins</h2>
-                <p>Demandez un audit gratuit de votre protection sociale ou prenez rendez-vous avec un de nos experts.
-                </p>
+                <h2>Discutons de votre situation</h2>
+                <p>Renouvellement en cours, doute sur la conformité de vos actes, besoin de visibilité sur vos comptes — exposez-nous le sujet.</p>
             </div>
             <div class="contact-grid">
                 <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
@@ -1245,38 +1361,8 @@
                         <label for="message">Votre besoin</label>
                         <textarea id="message" placeholder="Décrivez brièvement votre besoin..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">Demander un audit gratuit</button>
+                    <button type="submit" class="btn-submit">Envoyer</button>
                 </form>
-                <div class="contact-info fade-up">
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon">📍</div>
-                        <div>
-                            <h4>Adresse</h4>
-                            <p>Paris, Île-de-France</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon">📧</div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>contact@solutions-psc.fr</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon">📞</div>
-                        <div>
-                            <h4>Téléphone</h4>
-                            <p>01 00 00 00 00</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon">🕐</div>
-                        <div>
-                            <h4>Horaires</h4>
-                            <p>Du lundi au vendredi<br>9h00 — 18h00</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -1335,44 +1421,22 @@
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        // ── Counter animation ──
-        function animateCounters() {
-            document.querySelectorAll('.stat-number').forEach(counter => {
-                const target = parseInt(counter.dataset.count);
-                const suffix = counter.dataset.suffix || '';
-                const duration = 2000;
-                const start = performance.now();
-
-                function update(now) {
-                    const elapsed = now - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    const current = Math.floor(eased * target);
-
-                    if (target >= 1000) {
-                        counter.textContent = current.toLocaleString('fr-FR') + suffix;
-                    } else {
-                        counter.textContent = current + suffix;
-                    }
-
-                    if (progress < 1) {
-                        requestAnimationFrame(update);
-                    }
-                }
-                requestAnimationFrame(update);
-            });
-        }
-
-        const statsObserver = new IntersectionObserver((entries) => {
+        // ── Approach line draw animation ──
+        const approachLine = document.getElementById('approachLine');
+        const approachSteps = document.querySelectorAll('.approach-step');
+        const approachObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    animateCounters();
-                    statsObserver.unobserve(entry.target);
+                    approachLine.classList.add('animate');
+                    const delays = [0, 670, 1460, 2400];
+                    approachSteps.forEach((step, i) => {
+                        setTimeout(() => step.classList.add('step-reached'), delays[i]);
+                    });
+                    approachObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.3 });
-
-        statsObserver.observe(document.querySelector('.stats'));
+        approachObserver.observe(document.querySelector('.approach-grid'));
 
         // ── Active nav link on scroll ──
         const sections = document.querySelectorAll('section[id]');
@@ -1389,6 +1453,24 @@
             });
         });
 
+        // ── Circles scroll alignment on mobile ──
+        const circlesContainer = document.querySelector('.hero-circles');
+        const heroSection = document.getElementById('hero');
+
+        function updateMobileCirclesAlignment() {
+            if (window.innerWidth > 1024 || !circlesContainer || !heroSection) {
+                circlesContainer?.classList.remove('circles-aligned');
+                return;
+            }
+
+            const triggerOffset = Math.max(160, heroSection.offsetHeight * 0.28);
+            circlesContainer.classList.toggle('circles-aligned', window.scrollY > triggerOffset);
+        }
+
+        window.addEventListener('scroll', updateMobileCirclesAlignment, { passive: true });
+        window.addEventListener('resize', updateMobileCirclesAlignment);
+        updateMobileCirclesAlignment();
+
         // ── Form submit ──
         function handleSubmit(e) {
             e.preventDefault();
@@ -1397,7 +1479,7 @@
             btn.style.background = '#4CAF50';
             btn.style.color = '#fff';
             setTimeout(() => {
-                btn.textContent = 'Demander un audit gratuit';
+                btn.textContent = 'Envoyer';
                 btn.style.background = '';
                 btn.style.color = '';
                 e.target.reset();
